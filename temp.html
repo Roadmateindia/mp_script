@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+body {
+  width: 8cm;
+  height: 10cm;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial;
+}
+
+.reflective-border {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #facc15 0px,
+      #facc15 12px,
+      #020617 12px,
+      #020617 24px
+    );
+  border-radius: 16px;
+  box-shadow:
+    0 0 6px #fde047,
+    inset 0 0 6px #fde047;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at top, #ffffff, #eef2ff);
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.logo img {
+  height: 28px;
+}
+
+.qr {
+  display: block;
+  margin: 8px auto;
+  width: 150px;
+  padding: 6px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid #020617;
+}
+
+.title {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 6px;
+  color: #020617;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #020617, transparent);
+  margin: 10px 0;
+}
+
+.info {
+  font-size: 11px;
+  color: #020617;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.icon {
+  width: 18px;
+  text-align: center;
+  margin-right: 6px;
+}
+</style>
+</head>
+
+<body>
+<div class="reflective-border">
+  <div class="card">
+
+    <div class="logo">
+      <img src="static_logo.png">
+    </div>
+
+    <img src="qr.png" class="qr">
+
+    <div class="title">SCAN TO CONTACT VEHICLE OWNER</div>
+
+    <div class="divider"></div>
+
+    <div class="info">
+      <div class="row"><div class="icon">📸</div>@meripahchanindia</div>
+      <div class="row"><div class="icon">✉</div>info@company.com</div>
+      <div class="row"><div class="icon">🌐</div>www.meripahchan.in</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
