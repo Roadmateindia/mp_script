@@ -4,6 +4,9 @@ from io import BytesIO
 from PIL import Image
 import os
 
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.utils import ImageReader
@@ -18,6 +21,8 @@ st.subheader("QR Details")
 
 qr_mode = st.radio("QR Source", ["Generate from Links", "Upload QR Images"])
 qr_imgs = []
+pdfmetrics.registerFont(TTFont("DejaVu", "DejaVuSans.ttf"))
+pdfmetrics.registerFont(TTFont("DejaVu-Bold", "DejaVuSans-Bold.ttf"))
 
 if qr_mode == "Generate from Links":
     links = st.text_area(
@@ -43,6 +48,12 @@ st.subheader("Company Info")
 company_email = st.text_input("Company Email", "info@company.com")
 company_url = st.text_input("Company Website", "www.meripahchan.in")
 insta_id = st.text_input("Instagram ID", "@meripahchanindia")
+
+# # 📌 Ready-to-use emojis for contact details
+# WEBSITE_ICON = "🌐"      # Website / URL
+# EMAIL_ICON   = "✉"       # Email
+# INSTAGRAM_ICON = "🔗"    # Instagram
+# PHONE_ICON  = "📱"       # Optional: phone number
 
 # ---------------- PROCESS ----------------
 if qr_imgs:
@@ -105,7 +116,9 @@ if qr_imgs:
 
         # ---- SCAN TEXT (BELOW QR – FIXED) ----
         c.setFillColorRGB(0.05, 0.1, 0.2)
-        c.setFont("Helvetica-Bold", 15)
+        # c.setFont("Helvetica-Bold", 12)
+        c.setFont("DejaVu-Bold", 12)
+
         c.drawCentredString(
             cx,
             qr_y - 25,
@@ -113,21 +126,25 @@ if qr_imgs:
         )
 
         # ---- DIVIDER ----
-        c.setStrokeColorRGB(0.7, 0.7, 0.7)
-        c.line(
-            START_X + 30,
-            y[0] + 78,
-            START_X + CARD_W - 30,
-            y[0] + 78
-        )
+        # c.setStrokeColorRGB(0.7, 0.7, 0.7)
+        # c.line(
+        #     START_X + 35,
+        #     y[0] + 78,
+        #     START_X + CARD_W - 30,
+        #     y[0] + 78
+        # )
 
         # ---- CONTACT DETAILS WITH ICONS ----
         c.setFont("Helvetica", 9.5)
         c.setFillColorRGB(0, 0, 0)
 
-        c.drawCentredString(cx, y[0] + 40, f"url:  : {company_url}")
-        c.drawCentredString(cx, y[0] + 25, f" ✉ Email     : {company_email}")
-        c.drawCentredString(cx, y[0] + 12, f"📸 Instagram : {insta_id}")
+        # c.drawCentredString(cx, y[0] + 40, f"{{WEBSITE_ICON}}  : {company_url}")
+        # c.drawCentredString(cx, y[0] + 25, f"{{EMAIL_ICON}}     : {company_email}")
+        # c.drawCentredString(cx, y[0] + 12, f"{{INSTAGRAM_ICON}} Instagram : {insta_id}")
+        c.drawString(cx - 75, y[0] + 44, f"Website : {company_url}")
+        c.drawString(cx - 75, y[0] + 29, f"Email : {company_email}")
+        c.drawString(cx - 75, y[0] + 14, f"Instagram : {insta_id}")
+
         # ---- NEXT CARD ----
         y[0] -= (CARD_H + GAP)
         if y[0] < 60:
